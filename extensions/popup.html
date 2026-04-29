@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YT Summarizer</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo-icon">▶</div>
+      <div>
+        <h1 class="app-title">YT Summarizer</h1>
+        <p class="app-sub">Powered by Ollama · llama3.2</p>
+      </div>
+    </div>
+    <div id="statusDot" class="status-dot offline" title="Backend status"></div>
+  </header>
+
+  <!-- ── Video Info ──────────────────────────────────────────── -->
+  <div id="videoInfo" class="video-info hidden">
+    <div class="video-badge">
+      <span class="yt-icon">📺</span>
+      <span id="videoIdLabel" class="video-id-text">—</span>
+    </div>
+  </div>
+
+  <!-- ── No Video Warning ────────────────────────────────────── -->
+  <div id="noVideo" class="alert alert-warn hidden">
+    ⚠️ Open a YouTube video first, then click the extension.
+  </div>
+
+  <!-- ── Tab Bar ────────────────────────────────────────────── -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="summary">📋 Summary</button>
+    <button class="tab-btn"        data-tab="chat">💬 Chat</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       TAB: Summary
+  ══════════════════════════════════════════════════════════════ -->
+  <div id="tab-summary" class="tab-panel active">
+
+    <button id="btnSummarize" class="btn btn-primary" disabled>
+      <span class="btn-icon">✨</span> Generate Summary
+    </button>
+
+    <!-- Loader -->
+    <div id="summaryLoader" class="loader-wrap hidden">
+      <div class="spinner"></div>
+      <p class="loader-text" id="loaderText">Processing transcript…</p>
+    </div>
+
+    <!-- Output -->
+    <div id="summaryOutput" class="output-box hidden">
+      <div class="output-header">
+        <span>📄 Summary</span>
+        <button id="copySummaryBtn" class="copy-btn" title="Copy to clipboard">⧉</button>
+      </div>
+      <div id="summaryText" class="output-content"></div>
+    </div>
+
+    <div id="summaryError" class="alert alert-error hidden"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       TAB: Chat
+  ══════════════════════════════════════════════════════════════ -->
+  <div id="tab-chat" class="tab-panel">
+
+    <!-- Process video first banner -->
+    <div id="chatNotReady" class="alert alert-info">
+      Click <b>Generate Summary</b> first to load the video, then come back here to chat.
+    </div>
+
+    <!-- Chat messages -->
+    <div id="chatMessages" class="chat-messages hidden"></div>
+
+    <!-- Input -->
+    <div id="chatInputArea" class="chat-input-area hidden">
+      <textarea
+        id="chatInput"
+        class="chat-input"
+        rows="2"
+        placeholder="Ask something about the video…"
+      ></textarea>
+      <button id="sendBtn" class="btn btn-send">
+        <span>➤</span>
+      </button>
+    </div>
+
+    <div id="chatError" class="alert alert-error hidden"></div>
+  </div>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    Backend: <code>localhost:8000</code> &nbsp;|&nbsp; Model: <code>llama3.2</code>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
