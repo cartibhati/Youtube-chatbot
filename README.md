@@ -1,4 +1,4 @@
-# 📺 YT Video Summarizer — Chrome Extension
+# 📺 YT Video Summarizer — Chrome Extension 
 
 A Chrome extension that lets you **summarize any YouTube video** and **chat with it** — all running **100% locally** on your machine using [Ollama](https://ollama.com/) (llama3.2). No OpenAI, no API keys, no cloud.
 
